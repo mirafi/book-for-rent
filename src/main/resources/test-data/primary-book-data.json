@@ -1,0 +1,33 @@
+[
+  {
+    "isbn":"0-2265-4291-2",
+    "title":"Assassins And Butchers",
+    "status":"AVAILABLE",
+    "rentalStatus":"AVAILABLE"
+  },
+  {
+    "isbn":"0-1854-5460-7",
+    "title":"Bandit With Immortality",
+    "status":"AVAILABLE",
+    "rentalStatus":"AVAILABLE"
+  },
+  {
+    "isbn":"0-4014-9855-7",
+    "title":"Cat Without A Goal",
+    "status":"AVAILABLE",
+    "rentalStatus":"AVAILABLE"
+  },
+  {
+    "isbn":"0-4797-6230-9",
+    "title":"Family Of The Ocean",
+    "status":"AVAILABLE",
+    "rentalStatus":"AVAILABLE"
+  },
+  {
+    "isbn":"0-3480-8187-1",
+    "title":"Invited By My End",
+    "status":"AVAILABLE",
+    "rentalStatus":"AVAILABLE"
+  }
+
+]
