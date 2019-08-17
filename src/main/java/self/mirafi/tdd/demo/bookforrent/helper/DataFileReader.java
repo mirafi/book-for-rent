@@ -3,10 +3,7 @@ package self.mirafi.tdd.demo.bookforrent.helper;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import self.mirafi.tdd.demo.bookforrent.persistence.entity.Book;
 
-import java.io.File;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
 import java.util.Arrays;
 
 public class DataFileReader {
