@@ -1,11 +1,12 @@
 package self.mirafi.tdd.demo.bookforrent.form;
 
-import self.mirafi.tdd.demo.bookforrent.constant.RENTAL_STATUS;
+
+import self.mirafi.tdd.demo.bookforrent.constant.ENUMS;
 
 public class BookSearchForm {
     private String isbn;
     private String title;
-    private RENTAL_STATUS rentalStatus;
+    private ENUMS.RENTAL_STATUS rentalStatus;
 
 
     public String getIsbn() {
@@ -24,11 +25,11 @@ public class BookSearchForm {
         this.title = title;
     }
 
-    public RENTAL_STATUS getRentalStatus() {
+    public ENUMS.RENTAL_STATUS getRentalStatus() {
         return rentalStatus;
     }
 
-    public void setRentalStatus(RENTAL_STATUS rentalStatus) {
+    public void setRentalStatus(ENUMS.RENTAL_STATUS rentalStatus) {
         this.rentalStatus = rentalStatus;
     }
 }

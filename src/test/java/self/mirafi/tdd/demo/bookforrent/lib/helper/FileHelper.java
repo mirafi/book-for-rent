@@ -1,4 +1,4 @@
-package self.mirafi.tdd.demo.bookforrent.helper;
+package self.mirafi.tdd.demo.bookforrent.lib.helper;
 
 import java.io.IOException;
 import java.nio.file.Files;

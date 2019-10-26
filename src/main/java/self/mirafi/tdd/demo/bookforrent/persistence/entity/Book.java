@@ -2,14 +2,13 @@ package self.mirafi.tdd.demo.bookforrent.persistence.entity;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import self.mirafi.tdd.demo.bookforrent.constant.RENTAL_STATUS;
-import self.mirafi.tdd.demo.bookforrent.constant.STATUS;
+import self.mirafi.tdd.demo.bookforrent.constant.ENUMS;
 
 public class Book {
     private String isbn;
     private String title;
-    private STATUS status;
-    private RENTAL_STATUS rentalStatus;
+    private ENUMS.STATUS status;
+    private ENUMS.RENTAL_STATUS rentalStatus;
 
     public String getIsbn() {
         return isbn;
@@ -27,19 +26,19 @@ public class Book {
         this.title = title;
     }
 
-    public STATUS getStatus() {
+    public ENUMS.STATUS getStatus() {
         return status;
     }
 
-    public void setStatus(STATUS status) {
+    public void setStatus(ENUMS.STATUS status) {
         this.status = status;
     }
 
-    public RENTAL_STATUS getRentalStatus() {
+    public ENUMS.RENTAL_STATUS getRentalStatus() {
         return rentalStatus;
     }
 
-    public void setRentalStatus(RENTAL_STATUS rentalStatus) {
+    public void setRentalStatus(ENUMS.RENTAL_STATUS rentalStatus) {
         this.rentalStatus = rentalStatus;
     }
 
