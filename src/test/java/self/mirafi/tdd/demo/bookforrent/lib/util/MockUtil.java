@@ -6,7 +6,6 @@ import self.mirafi.tdd.demo.bookforrent.form.BookSearchForm;
 import self.mirafi.tdd.demo.bookforrent.persistence.entity.Book;
 import self.mirafi.tdd.demo.bookforrent.service.SearchService;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -32,10 +31,10 @@ public class MockUtil {
         doAnswer(i->{
             BookSearchForm form = i.getArgument(0);
             String keyWord = form.getTitle();
-            List<Book> bookList = null;
+            Collection<Book> bookList = null;
             try {
                 bookList = books.stream()
-                        .filter(b -> b.getTitle().contains(keyWord))
+                        .filter(b -> b.getTitle().startsWith(keyWord))
                         .peek(System.out::println)
                         .collect(Collectors.toList());
             }catch (Exception e){
@@ -50,8 +49,5 @@ public class MockUtil {
         return searchService;
     }
 
-    public static void main(String[] args) {
 
-        System.out.println();
-    }
 }
