@@ -10,6 +10,7 @@ public class Book {
     private ENUMS.STATUS status;
     private ENUMS.RENTAL_STATUS rentalStatus;
 
+
     public String getIsbn() {
         return isbn;
     }

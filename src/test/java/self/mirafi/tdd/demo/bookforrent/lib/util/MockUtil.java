@@ -25,7 +25,6 @@ public class MockUtil {
     }
     private static SearchService getSearchBehaviour(){
         Collection<Book> books =  DataLoaderUtil.loadData(ENUMS.DATA_SET.PRIMARY_DATA_SET);
-        books.stream().forEach(System.out::println);
         SearchService searchService = Mockito.mock(SearchService.class);
 
         doAnswer(i->{

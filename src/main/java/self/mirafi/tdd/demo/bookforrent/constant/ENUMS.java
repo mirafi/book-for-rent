@@ -23,4 +23,8 @@ public class ENUMS {
     public enum BEHAVIOUR{
         SEACH;
     }
+
+    public enum POJO_METHODS{
+        GETTER,SETTER,HASCODE,EQUALS,ALL
+    }
 }
