@@ -56,13 +56,18 @@ public class Book {
         return rentalStatus == book.rentalStatus;
     }
 
-    @Override
+   /* @Override
     public int hashCode() {
         int result = isbn != null ? isbn.hashCode() : 0;
         result = 31 * result + (title != null ? title.hashCode() : 0);
         result = 31 * result + (status != null ? status.hashCode() : 0);
         result = 31 * result + (rentalStatus != null ? rentalStatus.hashCode() : 0);
         return result;
+    }*/
+
+    @Override
+    public int hashCode() {
+       return 0;
     }
 
     @Override

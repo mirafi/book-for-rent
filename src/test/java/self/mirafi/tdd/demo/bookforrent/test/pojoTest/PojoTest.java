@@ -43,4 +43,38 @@ public class PojoTest {
         }
 
     }
+
+    @Test
+    public void hashCodeAndEqualTest() throws IllegalAccessException, InstantiationException, InvocationTargetException, NoSuchMethodException {
+        PojoInf pojoInf =  PojoUtil.getMethod(Book.class);
+        Object obj = Book.class.newInstance();
+        Object otherObj = Book.class.newInstance();
+
+        Set<Map<ENUMS.POJO_METHODS,Method>> methods = pojoInf.getMethods();
+
+        Method hashCodeMethod =  pojoInf.getHashCodeMethod();
+        Method equalsMethod =  pojoInf.getEqualsMethod();
+
+
+
+        assertThat(hashCodeMethod)
+                .as("Hashcode is not implemented ")
+                .isNotNull();
+
+        assertThat(equalsMethod)
+                .as("Equals not implemented")
+                .isNotNull();
+
+        int hashCodeFirstTime =(Integer) hashCodeMethod.invoke(obj);
+        int hashCodeSecondTime =(Integer) hashCodeMethod.invoke(obj);
+
+        assertThat(hashCodeFirstTime)
+                .as("Hash code different ," +
+                        " first time "+hashCodeFirstTime+" second time "+hashCodeSecondTime)
+                .isEqualTo(hashCodeSecondTime);
+
+    }
+
+
+
 }

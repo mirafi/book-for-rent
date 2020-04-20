@@ -49,17 +49,9 @@ public class PojoUtil {
 
 
 
-        try {
-           PojoInf pojoInf =  getMethod(Book.class);
-            System.out.println(pojoInf);
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        }
+        System.out.println(new Book().hashCode());
+
+        System.out.println(new Book().hashCode());
     }
+
 }
