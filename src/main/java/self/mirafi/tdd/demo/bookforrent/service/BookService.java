@@ -7,6 +7,9 @@ import java.util.List;
 
 
 
-public interface SearchService {
+public interface BookService {
     List<Book> get(BookSearchForm form);
+    Book getByIsbn(String isbn,boolean throwExceptionIfNotFounds)throws RuntimeException;
+    Book getByIsbn(String isbn);
+
 }

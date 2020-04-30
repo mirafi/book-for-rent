@@ -21,7 +21,7 @@ public class ENUMS {
     }
 
     public enum BEHAVIOUR{
-        SEACH;
+        BOOK_SERVICE;
     }
 
     public enum POJO_METHODS{
