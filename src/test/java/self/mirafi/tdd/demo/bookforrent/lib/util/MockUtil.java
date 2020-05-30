@@ -2,6 +2,7 @@ package self.mirafi.tdd.demo.bookforrent.lib.util;
 
 import org.mockito.Mockito;
 import self.mirafi.tdd.demo.bookforrent.constant.ENUMS;
+import self.mirafi.tdd.demo.bookforrent.form.BookCreateForm;
 import self.mirafi.tdd.demo.bookforrent.form.BookSearchForm;
 import self.mirafi.tdd.demo.bookforrent.persistence.entity.Book;
 import self.mirafi.tdd.demo.bookforrent.service.BookService;
@@ -24,7 +25,8 @@ public class MockUtil {
     }
     private static BookService getBookServiceStubs(){
         Collection<Book> books =  DataLoaderUtil.loadData(ENUMS.DATA_SET.PRIMARY_DATA_SET);
-        BookService searchService = Mockito.mock(BookService.class);
+        BookService bookService = Mockito.mock(BookService.class);
+
 
         doAnswer(i->{
             BookSearchForm form = i.getArgument(0);
@@ -39,7 +41,7 @@ public class MockUtil {
                 e.printStackTrace();
             }
             return bookList;
-            }).when(searchService)
+            }).when(bookService)
                 .get(any(BookSearchForm.class));
 
 
@@ -53,17 +55,41 @@ public class MockUtil {
             if(book==null && throwException )throw new RuntimeException("Book not found");
             return book;
 
-        }).when(searchService)
+        }).when(bookService)
                 .getByIsbn(any(String.class),any(Boolean.class));
 
         doAnswer(i->{
             String isbn = i.getArgument(0);
-            return searchService.getByIsbn(isbn,false);
+            return bookService.getByIsbn(isbn,false);
 
-        }).when(searchService)
+        }).when(bookService)
                 .getByIsbn(any(String.class));
 
-        return searchService;
+
+        /**
+         * Create method Stubs
+         * */
+        doAnswer(i->{
+            BookCreateForm form = i.getArgument(0);
+
+            Book book = bookService.getByIsbn(form.getIsbn());
+
+            if(book!=null)throw new RuntimeException("Book already exist");
+
+            book =new Book();
+            book.setTitle(form.getTitle());
+            book.setIsbn(form.getIsbn());
+            book.setStatus(ENUMS.STATUS.AVAILABLE);
+            book.setRentalStatus(ENUMS.RENTAL_STATUS.AVAILABLE);
+
+            books.add(book);
+
+            return book;
+
+        }).when(bookService)
+            .create(any(BookCreateForm.class));
+
+        return bookService;
     }
 
 

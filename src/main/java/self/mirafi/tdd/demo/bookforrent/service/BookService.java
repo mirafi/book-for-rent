@@ -1,5 +1,6 @@
 package self.mirafi.tdd.demo.bookforrent.service;
 
+import self.mirafi.tdd.demo.bookforrent.form.BookCreateForm;
 import self.mirafi.tdd.demo.bookforrent.form.BookSearchForm;
 import self.mirafi.tdd.demo.bookforrent.persistence.entity.Book;
 
@@ -11,5 +12,5 @@ public interface BookService {
     List<Book> get(BookSearchForm form);
     Book getByIsbn(String isbn,boolean throwExceptionIfNotFounds)throws RuntimeException;
     Book getByIsbn(String isbn);
-
+    Book create(BookCreateForm form);
 }

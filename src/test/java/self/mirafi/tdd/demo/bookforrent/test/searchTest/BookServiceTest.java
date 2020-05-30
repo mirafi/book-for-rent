@@ -2,7 +2,6 @@ package self.mirafi.tdd.demo.bookforrent.test.searchTest;
 
 import static org.fest.assertions.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.verify;
 import static org.mockito.internal.verification.VerificationModeFactory.times;
 
@@ -14,6 +13,7 @@ import org.junit.platform.commons.util.StringUtils;
 import org.junit.rules.ExpectedException;
 import org.springframework.boot.test.context.SpringBootTest;
 import self.mirafi.tdd.demo.bookforrent.constant.ENUMS;
+import self.mirafi.tdd.demo.bookforrent.form.BookCreateForm;
 import self.mirafi.tdd.demo.bookforrent.form.BookSearchForm;
 import self.mirafi.tdd.demo.bookforrent.lib.util.MockUtil;
 import self.mirafi.tdd.demo.bookforrent.persistence.entity.Book;
@@ -28,7 +28,7 @@ import java.util.List;
 @SpringBootTest
 public class BookServiceTest {
 
-    private BookService searchService;
+    private BookService bookService;
 
     @Rule
     public ExpectedException expectedException;
@@ -36,7 +36,7 @@ public class BookServiceTest {
     @PostConstruct
     public void setUpStabs(){
 
-        this.searchService =  MockUtil.getBehaviour(ENUMS.BEHAVIOUR.BOOK_SERVICE);
+        this.bookService =  MockUtil.getBehaviour(ENUMS.BEHAVIOUR.BOOK_SERVICE);
         this.expectedException = ExpectedException.none();
     }
 
@@ -64,15 +64,15 @@ public class BookServiceTest {
         String correctIsbn = "0-2265-4291-2";
 
 
-        Book book = this.searchService.getByIsbn(unknownIsbn);
+        Book book = this.bookService.getByIsbn(unknownIsbn);
         assertThat(book)
                 .as("Must return null")
                 .isNull();
-        verify(this.searchService,times(1)).getByIsbn(unknownIsbn,false);
+        verify(this.bookService,times(1)).getByIsbn(unknownIsbn,false);
 
 
 
-        book = this.searchService.getByIsbn(correctIsbn);
+        book = this.bookService.getByIsbn(correctIsbn);
         assertThat(book)
                 .as("Must return not null")
                 .isNotNull();
@@ -81,10 +81,10 @@ public class BookServiceTest {
                 .as("Isbn does not match")
                 .isEqualToIgnoringCase(correctIsbn);
 
-        verify(this.searchService,times(1)).getByIsbn(correctIsbn,false);
+        verify(this.bookService,times(1)).getByIsbn(correctIsbn,false);
 
         try{
-            this.searchService.getByIsbn(unknownIsbn,true);
+            this.bookService.getByIsbn(unknownIsbn,true);
             assertFalse(true,"Must throw exception");
         }catch (Exception e){
 
@@ -98,7 +98,7 @@ public class BookServiceTest {
         BookSearchForm form = new BookSearchForm();
         form.setTitle(keyWord);
 
-        List<Book> bookList = searchService.get(form);
+        List<Book> bookList = bookService.get(form);
 
         if(StringUtils.isBlank(form.getTitle()))return DynamicTest.dynamicTest("Search test for keyword null",null);
         if(bookList==null || bookList.size()==0)return DynamicTest.dynamicTest("Search test for keyword "+keyWord,null);
@@ -118,5 +118,42 @@ public class BookServiceTest {
 
     }
 
+    @Test
+    public void createTest(){
+
+        BookCreateForm form = new BookCreateForm();
+
+        form.setIsbn("0-2265-4291-3");
+        form.setTitle("Test Book");
+
+
+        Book book = this.bookService.create(form);
+
+        /**
+         * After create book properties test
+         * */
+        assertThat(book.getIsbn()).isEqualTo(form.getIsbn());
+        assertThat(book.getTitle()).isEqualTo(form.getTitle());
+        assertThat(book.getStatus()).isEqualTo(ENUMS.STATUS.AVAILABLE);
+        assertThat(book.getRentalStatus()).isEqualTo(ENUMS.RENTAL_STATUS.AVAILABLE);
+
+        /**
+         * Isbn unique test
+         * */
+        try{
+            this.bookService.create(form);
+            assertFalse(true,"Must throw exception");
+        }catch (RuntimeException e){
+
+        }
+
+        Book searchBook = this.bookService.getByIsbn(form.getIsbn());
+        /**
+         * After create search by isbn test
+         * */
+        assertThat(searchBook).isEqualTo(book);
+
+
+    }
 
 }
